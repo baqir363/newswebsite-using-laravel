@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 
@@ -16,5 +17,6 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('news', NewsController::class);
+    Route::resource('category', CategoryController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

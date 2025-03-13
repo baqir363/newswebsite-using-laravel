@@ -1,40 +1,46 @@
-<div>
-    <form wire:submit.prevent="save" method="POST">
+<form wire:submit.prevent="save" enctype="multipart/form-data">
         @csrf
-        <div class="mb-3">
+
+        <div>
             <label for="heading">Heading</label>
-            <input type="text" wire:model.defer="heading" class="form-control" id="heading">
-            @error('heading')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="excerpt">Excerpt</label>
-            <input type="text" wire:model.defer="excerpt" class="form-control" id="excerpt">
-            @error('excerpt')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="mb-3">
-            <label for="content">Content</label>
-            <textarea wire:model.defer="content" class="form-control" id="content"></textarea>
-            @error('content')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            <input type="text" id="heading" wire:model="heading" class="form-control">
+            @error('heading') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="category_id">Category</label>
-            <select wire:model.defer="category_id" class="form-control" id="category_id">
+        <div>
+            <label for="excerpt">Excerpt</label>
+            <textarea id="excerpt" wire:model="excerpt" class="form-control"></textarea>
+            @error('excerpt') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="content">Content</label>
+            <textarea id="content" wire:model="content" class="form-control"></textarea>
+            @error('content') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="category">Category</label>
+            <select id="category" wire:model="category_id" class="form-control">
                 <option value="">Select Category</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id}}">{{ $category->name }}</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </select>
-            @error('category_id')
-                <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @error('category_id') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
-        <input type="submit" class="btn btn-primary" value="Save">
-    </form>
-</div>
+
+        <div>
+            <label for="file">Image</label>
+            <input type="file" id="file" wire:model.live="file" class="form-control">
+            @error('file') <span class="text-danger error">{{ $message }}</span> @enderror
+            @if ($image)
+                <img src="{{ asset('storage/' . $image) }}" width="100">
+            @endif
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">
+            {{ $news_id ? 'Update News' : 'Add News' }}
+        </button>
+
+</form>

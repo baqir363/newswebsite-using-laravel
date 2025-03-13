@@ -16,7 +16,12 @@
                     </tr>
                     @foreach ($news as $row)
                         <tr>
-                            <td>{{ $row->heading }}</td>
+                            <td>
+                                @isset($row->image)
+                                    <img src="{{ asset('storage/'.$row->image)}}" alt="" style="width: 100px;" class="rounded float-start me-2">
+                                @endisset
+                                {{ $row->heading }}
+                            </td>
                             <td>{{ $row->category->name}}</td>
                             <td>{{ $row->created_at}}</td>
                             <td><a href="{{ route('news.edit',['news'=>$row->id])}}">Edit</a></td>

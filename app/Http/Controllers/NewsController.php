@@ -10,7 +10,7 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         $limit = 10;
         $news = News::latest()->paginate($limit);
@@ -35,6 +35,15 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            "heading"=>"required",
+            "excerpt"=>"required",
+            "content"=>"required",
+            "image"=>"image",
+            "category_id"=>"required",
+        ]);
+        $validated['user_id'] = \Auth::id();
+        return $news = News::create($validated);
     }
 
     /**
@@ -43,7 +52,11 @@ class NewsController extends Controller
     public function show(News $news)
     {
         //
-        return view('news.show', compact('news'));
+        if (\Request::wantsJson()) {
+            return $news;
+        } else{
+            return view('news.show', compact('news'));
+        }
     }
 
     /**

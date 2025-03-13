@@ -13,6 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        return Category::paginate(10);
     }
 
     /**
@@ -38,7 +39,8 @@ class CategoryController extends Controller
     {
         //
         $category = Category::where('slug', $category)->firstOrFail();
-        $news = \App\Models\News::where('category_id',$category->id)->paginate(10);
+        $news = \App\Models\News::where('category_id',$category->id)->latest()->paginate(10);
+
         return view('category.show', compact('category','news'));
     }
 
