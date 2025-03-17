@@ -1,5 +1,5 @@
 @extends('layouts.account')
 
 @section('account-content')
-    Welcome {{ Auth::user()->name }}
+    <h5>My Profile</h5>
 @endsection

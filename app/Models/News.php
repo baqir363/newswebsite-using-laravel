@@ -12,4 +12,14 @@ class News extends Model
     {
         return $this->belongsTo(\App\Models\Category::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(\App\Models\City::class);
+    }
 }

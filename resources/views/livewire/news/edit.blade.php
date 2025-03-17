@@ -30,13 +30,19 @@
             @error('category_id') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
-        <div>
+        <div class="mb-3">
             <label for="file">Image</label>
             <input type="file" id="file" wire:model.live="file" class="form-control">
             @error('file') <span class="text-danger error">{{ $message }}</span> @enderror
             @if ($image)
                 <img src="{{ asset('storage/' . $image) }}" width="100">
             @endif
+        </div>
+
+        <div>
+            <label for="city">City</label>
+            @livewire('city.autocomplete', ['event' => 'selectedCity', 'city_id' => $city_id])
+            @error('city_id') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">

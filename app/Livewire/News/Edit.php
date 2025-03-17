@@ -20,7 +20,8 @@ class Edit extends Component
     public $image; // Stores the existing image path (if any)
     public $file; // New image upload
     public $categories;
-
+    public $city_id;
+    protected $listeners = ['selectedCity' => 'updateCity'];
     protected function rules()
     {
         return [
@@ -29,6 +30,7 @@ class Edit extends Component
             'content' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'file' => 'nullable|image|max:2048', // Max 2MB for images
+            'city_id' => 'required|exists:cities,id',
         ];
     }
 
@@ -41,6 +43,7 @@ class Edit extends Component
             $this->content = $news->content;
             $this->category_id = $news->category_id;
             $this->image = $news->image;
+            $this->city_id = $news->city_id;
         }
 
         $this->categories = Category::all();
@@ -50,24 +53,24 @@ class Edit extends Component
 {
     $this->validate();
 
-    if (!$this->file) {
-        \Log::error("No file detected in Livewire component");
-        session()->flash('error', 'No file uploaded.');
-        return;
+    $news = $this->news_id ? News::find($this->news_id) : new News();
+
+    if ($this->file) {
+        if ($news->image) {
+            Storage::disk('public')->delete($news->image); // Delete old image
+        }
+        $filePath = $this->file->store('news', 'public'); // Store new image
+    } else {
+        $filePath = $this->image; // Keep old image
     }
 
-    // Store file
-    $filePath = $this->file->store('news', 'public');
-
-    \Log::info("Image stored at: " . $filePath); // Log storage path
-
-    $news = $this->news_id ? News::find($this->news_id) : new News();
 
     // Assign values
     $news->heading = $this->heading;
     $news->excerpt = $this->excerpt;
     $news->content = $this->content;
     $news->category_id = $this->category_id;
+    $news->city_id = $this->city_id ?? null;
     $news->image = $filePath; // Store in DB
 
     if (!$this->news_id) {
@@ -76,11 +79,14 @@ class Edit extends Component
 
     $news->save();
 
-    \Log::info("Final News Data:", $news->toArray()); // Debug
-
     session()->flash('message', 'News saved successfully.');
     return redirect()->route('news.index');
 }
+
+    public function updateCity($cityId)
+        {
+        $this->city_id = $cityId; // Correctly store selected city ID
+        }
     public function render()
     {
         return view('livewire.news.edit');
