@@ -24,7 +24,7 @@
                             </td>
                             <td>{{ $row->category->name}}</td>
                             <td>{{ $row->created_at}}</td>
-                            <td><a href="{{ route('news.edit',['news'=>$row->id])}}">Edit</a></td>
+                            <td><a href="{{ route('news.edit',['news'=>$row->slug])}}">Edit</a></td>
                         </tr>
                     @endforeach
                 </table>

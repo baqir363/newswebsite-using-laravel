@@ -9,6 +9,8 @@ class WelcomeController extends Controller
 {
     public function index()
     {
+
+        //\Auth::user()->assignRole('Super Admin');
         $categories = Category::get();
         $recent = \App\Models\News::latest()->limit(6)->get();
 

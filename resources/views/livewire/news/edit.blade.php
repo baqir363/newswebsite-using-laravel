@@ -3,8 +3,14 @@
 
         <div>
             <label for="heading">Heading</label>
-            <input type="text" id="heading" wire:model="heading" class="form-control">
+            <input type="text" id="heading" wire:model.live="heading" class="form-control">
             @error('heading') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
+            <label for="slug">Slug:/Url</label>
+            <input type="text" id="slug" wire:model="slug" class="form-control">
+            @error('slug') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div>

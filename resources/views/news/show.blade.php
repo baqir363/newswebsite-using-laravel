@@ -26,7 +26,8 @@
                 </div>
             </div>
             <div class="col">
-                <h5>More News</h5>
+                <h5>More {{ $news->category->name }} News</h5>
+                @livewire('category.recent', ['category'=>$news->category,'except'=>$news->id])
             </div>
         </div>
     </div>
