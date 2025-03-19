@@ -7,12 +7,14 @@ use App\Http\Controllers\NewsController;
 
 Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
+
+Route::get('/test', [App\Http\Controllers\WelcomeController::class, 'test']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/{category}/news', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
 Route::resource('news', 'App\Http\Controllers\NewsController');
-Route::resource('category', 'App\Http\Controllers\CategoryController');
 Route::group(['middleware' => ['can:manage categories']], function () {
         Route::resource('category', 'App\Http\Controllers\CategoryController');
  });
