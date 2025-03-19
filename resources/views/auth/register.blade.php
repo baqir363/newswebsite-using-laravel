@@ -68,6 +68,9 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="text-center">
+                            Already have an account? <a href="{{ route('login')}}">Login Here</a>
+                        </div>
                     </form>
                 </div>
             </div>

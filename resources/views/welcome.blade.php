@@ -42,6 +42,21 @@
                   </div>
             </div>
             <div class="col-md-3 py-3">
+                <div class="card border-primary text-dark bg-info">
+                    <div class="card-body">
+                      <h5 class="card-title">Become NewsMods Partner</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">Report/Edit/Anchor/Verify News</h6>
+                        <p class="card-text">
+                            Create your news channel or post news verified news and earn profit with us.
+                        </p>
+                        @guest
+                            <a href="{{ route('register')}}" class="btn btn-primary w-100">Register Now</a>
+                        @else
+                            <a href="{{ route('news.create')}}" class="btn btn-primary w-100">Add News</a>
+                        @endguest
+                    </div>
+                </div>
+
                 Adverisement
                 <div class="bg-secondary" style="height: 40vh;"></div>
             </div>

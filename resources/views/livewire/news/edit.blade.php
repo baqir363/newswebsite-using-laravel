@@ -2,6 +2,12 @@
         @csrf
 
         <div>
+            <label for="source">Source URL</label>
+            <input type="text" id="slug" wire:model="source" class="form-control">
+            @error('source') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div>
             <label for="heading">Heading</label>
             <input type="text" id="heading" wire:model.live="heading" class="form-control">
             @error('heading') <span class="text-danger error">{{ $message }}</span> @enderror

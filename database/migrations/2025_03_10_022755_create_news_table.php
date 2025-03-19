@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('heading');
             $table->string('slug');
+            $table->string('source');
             $table->text('excerpt');
             $table->text('content');
             $table->text('image')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
             $table->foreignId('city_id')->nullable();
-            $table->timestamps();
+            $table->timestampTz('published_at', $precision = 0)->nullable();
+            $table->timestampsTz($precision = 0);
         });
     }
 

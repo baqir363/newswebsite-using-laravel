@@ -15,6 +15,7 @@ class Edit extends Component
 
     public $news_id;
     public $heading;
+    public $source;
     public $excerpt;
     public $slug;
     public $content;
@@ -27,6 +28,7 @@ class Edit extends Component
     protected function rules()
     {
         return [
+            'source' => 'required|url',
             'heading' => 'required|string|max:255',
             'slug' => 'required|string|unique:news,slug,' . $this->news_id, // Ensure slug is unique
             'excerpt' => 'required|string',
@@ -41,6 +43,7 @@ class Edit extends Component
     {
         if ($news) {
             $this->news_id = $news->id;
+            $this->source = $news->source;
             $this->heading = $news->heading;
             $this->slug = $news->slug; // Load existing slug
             $this->excerpt = $news->excerpt;
@@ -73,6 +76,7 @@ class Edit extends Component
 
 
         // Assign values
+        $news->source = $this->source;
         $news->heading = $this->heading;
         $news->slug = Str::slug($this->heading);
         $news->excerpt = $this->excerpt;

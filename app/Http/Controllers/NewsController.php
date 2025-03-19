@@ -26,6 +26,9 @@ class NewsController extends Controller
      */
     public function create()
     {
+        if(!\Auth::check()){
+            return redirect(route('login'));
+        }
         return view('news.create');
     }
 
@@ -52,6 +55,7 @@ class NewsController extends Controller
     public function show(News $news)
     {
         //
+        // $news = News::where('slug',$news)->firstOrFail();
         if (\Request::wantsJson()) {
             return $news;
         } else{

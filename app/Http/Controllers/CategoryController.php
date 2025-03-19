@@ -27,6 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('category.create');
     }
 
     /**
@@ -55,6 +56,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -71,5 +73,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return redirect(route('category.index'));
     }
 }

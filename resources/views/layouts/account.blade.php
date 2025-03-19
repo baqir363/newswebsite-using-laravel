@@ -15,6 +15,8 @@
                         <li class="nav-item">
                             <a class="nav-link @if(url()->current()==route('password.edit')) active @endif" href="{{ route('password.edit')}}">Change Password</a>
                         </li>
+
+                        <li class="nav-item "><a class="nav-link @if(url()->current()==route('news.index')) active @endif"  href="{{ route('news.index')}}">My News</a></li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="#">My Earnings Report</a>
                         </li>

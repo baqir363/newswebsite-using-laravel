@@ -166,6 +166,13 @@
         window.onload=function(){
             startTime();
         }
+
+        function confirmDelete(formId)
+        {
+            if (confirm("Are you sure you want to delete?")) {
+                document.getElementById(formId).submit();
+            }
+        }
         </script>
 
 </body>

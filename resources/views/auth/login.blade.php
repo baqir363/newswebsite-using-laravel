@@ -64,6 +64,10 @@
                                 @endif
                             </div>
                         </div>
+
+                        <div class="text-center">
+                            Don't have an account? <a href="{{ route('register')}}">Register Here</a>
+                        </div>
                     </form>
                 </div>
             </div>
